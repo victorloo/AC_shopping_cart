@@ -1,1 +1,19 @@
 <h1>Back-End</h1>
+<ul>
+  <li>
+    <%= link_to  "Add New One", new_admin_product_path %>
+  </li>
+  <% @products.each do |product| %>
+
+  <li>
+    <%= product.name %>
+    <%= product.description %>
+    <%= product.price %>
+    <%= product.image %>
+    <%= link_to  "Detailed", admin_product_path(product) %>
+    <%= link_to  "Edit", edit_admin_product_path(product) %>
+    <%= link_to  "Delete",  admin_product_path(product), method: :delete, data: {confirm: "Are you sure?"} %>
+  </li>
+  
+  <% end %>
+</ul>
