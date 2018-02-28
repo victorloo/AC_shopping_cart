@@ -40,12 +40,6 @@ class Admin::ProductsController < ApplicationController
   
 
   private
-  def authenticate_admin
-    unless current_user.admin?
-      flash[:alert] = "Not Allow!"
-      redirect_to root_path
-    end
-  end
 
   def set_product
     @product = Product.find(params[:id])
