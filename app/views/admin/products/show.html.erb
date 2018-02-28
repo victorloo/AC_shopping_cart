@@ -6,7 +6,7 @@ Description: <%= @product.description %>
 <br>
 Price: <%= @product.price %>
 <br>
-Image: <%= @product.image %>
+Image: <%= image_tag @product.image, width: '600px' %>
 <br>
 
 <%= link_to  "Back to Index", admin_products_path %>

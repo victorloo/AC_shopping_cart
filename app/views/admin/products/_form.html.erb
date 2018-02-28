@@ -19,8 +19,9 @@
   <%= f.label :price, "Price" %>
   <%= f.number_field (:price, in: ${1.0..2000.0}, step: ${1.0}) %>
 
-  <%= f.label :image, "Image" %>
-  <p>上傳的按鈕還沒做</p>
+  <%= f.label :image, "Photo" %>
+  <%= image_tag @product.image, width: '300px' if @product.image? %>
+  <%= f.file_field :image %>
 
   <%= f.submit %>
 <% end %>
