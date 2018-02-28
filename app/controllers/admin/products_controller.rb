@@ -1,6 +1,8 @@
 class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin
+
+  before_action :set_product, only: [:edit, :update, :show, :destory]
   def index
     @products = Product.all
   end
@@ -21,7 +23,19 @@ class Admin::ProductsController < ApplicationController
   end
   
   def show
-    @product = Product.find(params[:id])
+  end
+
+  def edit
+  end
+  
+  def update
+    if @product.update_attributes(params[:product])
+      flash[:notice] = "Product was successfully updated"
+      redirect_to admin_product_path(@product)
+    else
+      flash[:alert] = "Something went wrong"
+      render 'edit'
+    end
   end
   
 
@@ -31,6 +45,10 @@ class Admin::ProductsController < ApplicationController
       flash[:alert] = "Not Allow!"
       redirect_to root_path
     end
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 
   def product_params
