@@ -1,12 +1,27 @@
-<h1><%= @product.name %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1><%= @product.name %></h1>
+    </div>
 
-Name: <%= @product.name %>
-<br>
-Description: <%= @product.description %>
-<br>
-Price: <%= @product.price %>
-<br>
-Image: <%= image_tag @product.image, width: '600px' %>
-<br>
+    <div class="col-md-4">
+      <%= image_tag @product.image, width: '600px', class: "img-responsive center-block" %>
+      <br>
+      <div class="well">
+        <ul class="list-unstyled">
+          <li>
+            <strong>Price:</strong> <%= @product.price %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <strong>Description:</strong>
+      <br>
+      <%= simple_format @product.description %>
+    </div>
 
-<%= link_to  "Back to Index", admin_products_path %>
+    <div class="clearfix"></div>
+    <hr>
+  </div>
+</div>
