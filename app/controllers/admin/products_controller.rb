@@ -38,6 +38,16 @@ class Admin::ProductsController < ApplicationController
     end
   end
   
+  def destroy
+    if @product.destroy
+      flash[:alert] = 'Product was successfully deleted.'
+      redirect_to admin_products_path
+    else
+      flash[:notice] = 'Something went wrong'
+      redirect_to admin_products_path
+    end
+  end
+  
 
   private
 
