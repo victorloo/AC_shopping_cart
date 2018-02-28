@@ -1,8 +1,7 @@
 <div class="container">
-  <h1>Front-End</h1>
-  <div class="row">
+  <div class="row" id="products">
     <% @products.each do |product| %>
-    <div class="col-sm-6 col-md-4">
+    <div class="col-sm-6 col-md-4 product-box">
       <div class="product-item">
         <%= image_tag product.image, class: "img-responsive center-block" %>
         <div class="caption">
@@ -16,4 +15,7 @@
       <%= paginate @products %>
     </div>
   </div>
+  <aside class="row">
+    <p>chart zone</p>
+  </aside>
 </div>
