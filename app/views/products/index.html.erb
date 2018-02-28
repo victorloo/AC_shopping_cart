@@ -1,1 +1,19 @@
-<h1>Front-End</h1>
+<div class="container">
+  <h1>Front-End</h1>
+  <div class="row">
+    <% @products.each do |product| %>
+    <div class="col-sm-6 col-md-4">
+      <div class="product-item">
+        <%= image_tag product.image, class: "img-responsive center-block" %>
+        <div class="caption">
+          <h3><%= link_to product.name, product_path(product) %></h3>
+          <p><%= truncate(product.description, length: 30) %></p>  
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <div class="text-center">
+      <%= paginate @products %>
+    </div>
+  </div>
+</div>
