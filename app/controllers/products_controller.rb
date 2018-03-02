@@ -13,8 +13,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     current_cart.add_cart_item(@product) # 加 product item
 
-    redirect_to root_path
-    # 也可以這樣寫︰redirect_back(fallback_location: root_path)
+    #redirect_back(fallback_location: root_path)
   end
 
   # 名稱不用 delete ，是因為 delete 專門給 destroy 使用
@@ -24,7 +23,7 @@ class ProductsController < ApplicationController
     cart_item = current_cart.cart_items.find_by(product_id: @product)
     cart_item.destroy
 
-    redirect_back(fallback_location: root_path)
+    #redirect_back(fallback_location: root_path)
   end
 
   def adjust_item
@@ -35,14 +34,14 @@ class ProductsController < ApplicationController
     if params[:type] == "add"
       cart_item.quantity += 1
     elsif params[:type] == "substract"
-      cart_item = current_cart.cart_items.find_by(product_id: @product)
+      cart_item.quantity -= 1
     end
 
     if cart_item.quantity == 0
       cart_item.destroy
     else
       cart_item.save
-    
     end
+    #redirect_back(fallback_location: root_path)
   end
 end
