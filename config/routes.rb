@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show] do
     post :add_to_cart, on: :member
-    post "remove_from_cart", on: :member
+    post :remove_from_cart, on: :member
+    post :adjust_item, on: :member
   end
   root 'products#index'
 
