@@ -10,7 +10,7 @@ class Cart < ApplicationRecord
       existing_item.save!
     else
       # 從0→1，建立關聯
-      cart_item = cart_items.build( product_id: product )
+      cart_item = cart_items.build( product_id: product.id )
       cart_item.save!
     end
     self.cart_items
@@ -25,7 +25,7 @@ class Cart < ApplicationRecord
   end
 
   def find_item_by(product)
-    self.cart_items.where(product_id: product).first(quantity)
+    self.cart_items.where(product_id: product).first
   end
   
   # 產生流水號
