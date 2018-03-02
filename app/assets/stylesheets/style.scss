@@ -1,15 +1,165 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
+}
+
+img {
+  display: block;
+}
+
 .product-item {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 4px;
   margin-bottom: 20px;
+  max-height: 276px;
 }
 
-.product-item img {
-  max-height: 180px;
-  width: 100%;
+div.product-item img {
+  max-height: 80px;
+  height: 20%;
+  width: auto;
 }
 
 .product-item .caption {
   padding: 10px;
+}
+
+div#nav {
+  background-color: #FFCC99;
+}
+
+/*div#products {
+  width: 75%;
+  float: left;
+}*/
+
+/*aside.row {
+  width: 23%;
+  max-height: 100%;
+  float: right;
+  border-left: 1px solid gray;
+}*/
+
+div.pro-image {
+  margin-top: 20px;
+}
+
+div.login {
+  margin: auto;
+}
+
+div.switch {
+  margin-bottom: 20px;
+}
+
+.admin-nav {
+  float: left;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+.admin-nav li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+}
+
+.admin-nav li a {
+  text-transform: capitalize;
+  display: block;
+}
+
+.edit-image {
+  float: left;
+  margin-bottom: 20px;
+  margin-right: 50px;
+  border: 1px solid grey;
+  width: 300px;
+  height: 300px;
+}
+
+.edit-submit {
+  float: right;
+  margin-right: 100px;
+  border: 1px solid grey;
+}
+
+.product-show {
+  border-right: 3px solid black;
+}
+
+/* cart */
+
+#product-list {
+  width: calc( 100% - 280px);
+  text-align: center;
+}
+
+#my-cart {
+  position: fixed;
+  top: 72px;
+  right: 0;
+  border-left: 1px solid #bbb;
+  padding: 15px;
+  width: 280px;
+  height: 100vh;
+  float: right;
+  background-color: #fff;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cart-item img, #cart-list img {
+  width: 75px;
+}
+
+.cart-item-info h3 {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+}
+
+#cart-list {
+  border: 1px solid #ccc;
+  padding: 21px;
+  border-radius: 4px;
+}
+
+.table-amount {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  width: 100%;
+}
+table.table-amount td, table.table-amount th {
+  border: 1px solid #ccc;
+  padding: 3px;
+  text-align: center;
 }

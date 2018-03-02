@@ -1,21 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h1><%= @product.name %></h1>
-    </div>
-
-    <div class="col-md-4">
+    <div class="col-md-4 pro-image">
       <%= image_tag @product.image, width: '600px', class: "img-responsive center-block" %>
       <br>
-      <div class="well">
-        <ul class="list-unstyled">
-          <li>
-            <strong>Price:</strong> <%= @product.price %>
-          </li>
-        </ul>
-      </div>
     </div>
     <div class="col-md-8">
+      <h1><%= @product.name %></h1>
+      <strong><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>: <%= @product.price %></strong>
+      <br>
       <strong>Description:</strong>
       <br>
       <%= simple_format @product.description %>
@@ -23,5 +15,8 @@
 
     <div class="clearfix"></div>
     <hr>
+    <div class="col-md-12">
+      <p>這裡要放按鈕<span>22222</span></p>
+    </div>
   </div>
 </div>
