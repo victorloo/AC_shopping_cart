@@ -27,19 +27,14 @@
               </td>
             </tr>
           </table>
-          <%= button_to  "Add to Cart", add_to_cart_product_path(product) %>
+          <%= button_to  "Add to Cart", add_to_cart_product_path(product), remote: true %>
           <!-- routes 有兩層(products & add_to_cart)，所以路徑要全部都寫上 -->
         </div>
       </div>
     </div>
     <% end %>
-    </div>
-    
-    
-    
-      <aside class="col-md-4">
-        <p>chart zone</p>
-      </aside>
+  </div>
+    <%= render "shared/cart" %>
   </div>
   <div class="text-center">
     <%= paginate @products %>
