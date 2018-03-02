@@ -5,11 +5,12 @@ namespace :dev do
     1000.times do |i|
       Product.create!(
         name: FFaker::Product.product_name,
-        description: FFaker::Lorem.phrase,
+        description: FFaker::Lorem.paragraph,
         price: rand(50..999),
-        image: File.open(File.join(Rails.root, "/seed_img/#{rand(0..20)}.jpg"))
+        image: FFaker::Avatar.image
       )
     end
     puts "now you have #{Product.count} products data."
   end
+
 end
