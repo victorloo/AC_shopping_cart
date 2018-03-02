@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart
 
   private
+  
+  def authenticate_admin!
+    unless current_user.admin?
+      flash[:alert] = "Not Allow!"
+      redirect_to root_path
+    end
+  end
 
   # 未來需要在 controller 跟 view 使用，所以存取這個變數
   def current_cart
