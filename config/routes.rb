@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   root 'products#index'
 
-  resources :cart
+  resource :cart
 
   namespace :admin do
     resources :products

@@ -19,7 +19,7 @@ class Cart < ApplicationRecord
   # 已經在 cart_item.rb 新增item_total
   def subtotal
     # .map 回傳 array
-    cart_item.map do |item|  
+    cart_items.map do |item|  
       item.item_total
     end.sum # 方法可以接在end後面
   end
