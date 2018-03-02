@@ -2,9 +2,16 @@
   <div class="row">
     <div class="col-md-12">
       <div class="switch">
-        <%= link_to "Products", admin_products_path, class: "btn btn-primary" %>
-        <%= link_to "Orders", root_path, class:"btn btn-default" %>
+        <ul class="admin-nav">
+          <li class="btn btn-default active">
+            <%= link_to "Products", admin_products_path %>
+          </li>
+          <li class="btn btn-default">
+            <%= link_to "Orders", root_path %>
+          </li>
+        </ul>
       </div>
+      <br>
       <div>
         <%= link_to  "Add New One", new_admin_product_path, class: "btn btn-primary" %>
       </div>
