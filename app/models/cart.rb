@@ -19,11 +19,15 @@ class Cart < ApplicationRecord
   # 已經在 cart_item.rb 新增item_total
   def subtotal
     # .map 回傳 array
-    cart_item.map do |itme|  
+    cart_item.map do |item|  
       item.item_total
     end.sum # 方法可以接在end後面
   end
 
+  def find_item_by(product)
+    self.cart_items.where(product_id: product).first(quantity)
+  end
+  
   # 產生流水號
   # after_save :generate_uid or after_commit
   # before_save
