@@ -6,10 +6,10 @@
   <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body>
+<body id="<%= controller_name %>_<%= action_name%>">
   <!-- 導覽列 -->
   <nav class="navbar navbar-default">
     <div class="container-fluid" id="nav">
@@ -37,10 +37,10 @@
             </li>
           <% end %>
           <li>
-            <%= link_to "Cart", root_path %>
+            <%= link_to "Cart", cart_path %>
           </li>
           <li>
-            <%= link_to  "Order", root_path %>
+            <%= link_to  "Order" %>
           </li>
           <li>
             <% if current_user %>
