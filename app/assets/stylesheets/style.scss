@@ -1,5 +1,29 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
+}
+
+img {
+  display: block;
+}
+
 .product-item {
-  box-sizing: content-box;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 4px;
@@ -7,9 +31,10 @@
   max-height: 276px;
 }
 
-.product-item img {
-  max-height: 120px;
-  width: 100%;
+div.product-item img {
+  max-height: 100px;
+  height: 30%;
+  width: auto;
 }
 
 .product-item .caption {
@@ -20,17 +45,17 @@ div#nav {
   background-color: #FFCC99;
 }
 
-div#products {
+/*div#products {
   width: 75%;
   float: left;
-}
+}*/
 
-aside.row {
+/*aside.row {
   width: 23%;
   max-height: 100%;
   float: right;
   border-left: 1px solid gray;
-}
+}*/
 
 div.pro-image {
   margin-top: 20px;
@@ -41,9 +66,25 @@ div.login {
 }
 
 div.switch {
-  border: 2px solid grey;
-  background-color: grey;
   margin-bottom: 20px;
+}
+
+.admin-nav {
+  float: left;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+.admin-nav li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+}
+
+.admin-nav li a {
+  text-transform: capitalize;
+  display: block;
 }
 
 .edit-image {
@@ -59,4 +100,8 @@ div.switch {
   float: right;
   margin-right: 100px;
   border: 1px solid grey;
+}
+
+.product-show {
+  border-right: 3px solid black;
 }

@@ -1,21 +1,49 @@
 <div class="container">
-  <div class="row" id="products">
-    <% @products.each do |product| %>
-    <div class="col-sm-6 col-md-4 product-box">
+  <div class="row">
+    <div class="col-md-8 product-show">
+      <% @products.each do |product| %>
+    <div class="col-sm-6 col-md-3">
       <div class="product-item">
-        <%= image_tag product.image, class: "img-responsive center-block" %>
+        
         <div class="caption">
-          <h3><%= link_to product.name, product_path(product) %></h3>
-          <p><%= truncate(product.description, length: 30) %></p>  
+          <table>
+            <tr>
+              <td>
+                <%= image_tag product.image, class: "img-responsive center-block img-thumbnail" %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <h4><%= link_to truncate(product.name, length: 10), product_path(product) %></h>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p><%= truncate(product.description, length: 10) %></p>  
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p><strong>Price:</strong><%= product.price %></p>
+              </td>
+            </tr>
+          </table>
+          <%= button_to  "Add to Cart", add_to_cart_product_path(product) %>
+          <!-- routes 有兩層(products & add_to_cart)，所以路徑要全部都寫上 -->
         </div>
       </div>
     </div>
     <% end %>
-    <div class="text-center">
-      <%= paginate @products %>
     </div>
+    
+    
+    
+      <aside class="col-md-4">
+        <p>chart zone</p>
+      </aside>
   </div>
-  <aside class="row">
-    <p>chart zone</p>
-  </aside>
+  <div class="text-center">
+    <%= paginate @products %>
+  </div>
+  
 </div>
