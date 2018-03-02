@@ -1,6 +1,4 @@
 class Admin::ProductsController < Admin::BaseController
-  before_action :authenticate_user!
-
   before_action :set_product, only: [:edit, :update, :show, :destory]
   def index
     @products = Product.page(params[:page]).per(10)
@@ -17,14 +15,8 @@ class Admin::ProductsController < Admin::BaseController
       redirect_to admin_products_path
     else
       flash[:alert] = "Something went wrong"
-      render 'new'
+      render :new
     end
-  end
-  
-  def show
-  end
-
-  def edit
   end
   
   def update
@@ -33,7 +25,7 @@ class Admin::ProductsController < Admin::BaseController
       redirect_to admin_product_path(@product)
     else
       flash[:alert] = "Something went wrong"
-      render 'edit'
+      render :edit
     end
   end
   
