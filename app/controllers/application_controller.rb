@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def set_cart # 製造 @cart
     
-    # 假設session內已經有cart_id (登入才會有)
+    # 假設session內已經有cart_id (登入才會有)  (提醒自己︰session類似領餐點的號碼牌)
     if session[:cart_id] 
       @cart = Cart.find_by(id: session[:cart_id])
     end
