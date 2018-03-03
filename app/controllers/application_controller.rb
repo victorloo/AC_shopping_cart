@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception #這好像是預設的，到現在還是不懂功能
+  protect_from_forgery with: :exception 
+  # 啟動 CSRF 安全性功能，所有非GET的HTTP request都必須帶有一個Token參數才能存取，
+  # Rails會自動在所有表單中幫你插入Token參數，預設的Layout中也有一行<%= csrf_meta_tag %>標籤
+  # 可以讓JavaScript讀取到這個Token。
+
+  # 當需要開放API給非瀏覽器客戶端時，例如手機端或第三方應用的回呼(webhook)，這時候我們會需要關閉這個功能
 
   # private 可以變成 global，這樣view上就可以用 current_cart → 自製的helper
   helper_method :current_cart 

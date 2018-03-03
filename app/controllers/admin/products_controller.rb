@@ -20,7 +20,8 @@ class Admin::ProductsController < Admin::AdminController
   end
   
   def update
-    if @product.update_attributes(product_params) # 不確定用 update_attributes 跟 update 的差別
+    if @product.update_attributes(product_params) 
+      # update_attributes 會接收傳進來的 Hash 並且 save，如果 object 無效或是被 validation 擋下的話會回傳 false
       flash[:notice] = "Product was successfully updated"
       redirect_to admin_product_path(@product)
     else

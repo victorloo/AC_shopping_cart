@@ -12,7 +12,7 @@ class Cart < ApplicationRecord
       existing_item.save!
     else #如果不存在，則建立
       # 從0→1，建立關聯
-      cart_item = cart_items.build( product_id: product.id ) # 我忘記為什麼用 build，這要查詢
+      cart_item = cart_items.build( product_id: product.id ) # 類似.new，慣例上用在關聯物件的建立，產生一個實例，尚未存入資料庫，需要.save
       cart_item.save!
     end
     self.cart_items # 確保最後回傳的是存在的商品
