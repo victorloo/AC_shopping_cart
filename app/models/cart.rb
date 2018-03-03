@@ -21,7 +21,7 @@ class Cart < ApplicationRecord
   # 已經在 cart_item.rb 新增item_total
   def subtotal
     # .map 回傳 array
-    cart_items.map do |item| # 用 map 可以直接回傳一個數值、不是 array
+    cart_items.map do |item| # 用 map 可以直接回傳一個 array
       item.item_total # 來自 cart_item.rb 的方法
     end.sum # 方法可以接在end後面，等同直接使用方法在 return 值
   end
