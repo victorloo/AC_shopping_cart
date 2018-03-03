@@ -4,6 +4,7 @@
   <div class="item-list">
     <% current_cart.cart_items.each do |item| %>
     <%= render partial: "shared/item", locals: { item: item } %>
+    <!-- 把 items 用 render 獨立出來 -->
     <% end %>
   </div>
   <hr>

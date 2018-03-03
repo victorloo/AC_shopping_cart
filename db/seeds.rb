@@ -10,6 +10,6 @@
 User.create(
   email: "homer@simpson.com",
   password: "123456",
-  role: "admin"
+  role: "admin" #記得管理員的差別是 role
 )
 puts "Default admin Homer created!"

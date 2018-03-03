@@ -5,9 +5,13 @@
     $ <%= item.product.price %>
     <div class="cart-item-adjust">
       <%= link_to "+", adjust_item_product_path(item.product, type: "add"), method: :post, remote: true %>
+      <!-- 增加數量的按鈕，動詞是 post -->
       <span class="cart-<%= item.product.id %>-qty"><%= item.quantity %></span>
+      <!-- 取得數量，這邊的設計巧思是 class -->
       <%= link_to "-", adjust_item_product_path(item.product, type: "substract"), method: :post, remote: true %>
+      <!-- 減少數量的按鈕，動詞是 post -->
       <%= link_to "", remove_from_cart_product_path(item.product), method: :post, remote: true, class: "glyphicon glyphicon-trash" %>
+      <!-- 全部刪除，動詞是 post -->
     </div>
   </div>
 </div>
