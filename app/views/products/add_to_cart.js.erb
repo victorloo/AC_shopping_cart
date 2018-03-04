@@ -2,6 +2,7 @@
 <% if item.quantity == 1 %>
   $('.item-list').append('<%= j render partial: "shared/item", locals: { item: item } %>');
   // locals用來設定指定變數，在不同view下，指定的變數該用什麼變數，item: 表示指定的變數； item 表示要用什麼變數
+  // j = escape_javascript 讓單雙引號不會影響 JavaScript 程式碼
 <% else %>
   $('.cart-<%= @product.id %>-qty').text("<%= item.quantity %>");
 <% end %>
