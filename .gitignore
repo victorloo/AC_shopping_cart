@@ -24,3 +24,6 @@
 
 # Ignore all photo by carrierwave
 /public/uploads
+
+# Ignore notes
+/wiki
