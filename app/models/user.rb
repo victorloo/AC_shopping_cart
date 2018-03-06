@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   # devise 內建的驗證
+  
+  has_many :orders, dependent: :destroy
 
   def admin? # 驗證是否是管理員
     self.role == "admin"
