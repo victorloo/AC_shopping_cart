@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  before_action :authenticate_user!
 
   def show
     @cart = current_cart # 對應到 application_controller的方法
