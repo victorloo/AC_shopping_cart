@@ -13,4 +13,22 @@ namespace :dev do
     puts "now you have #{Product.count} products data."
   end
 
+  task fake_users: :environment do
+    url = "https://uinames.com/api/?ext&region=united%20states"
+
+    15.times do
+      response = RestClient.get(url)
+      data = JSON.parse(response.body)
+
+      user = User.create!(
+        email: data["email"],
+        password: "123456",
+      )
+
+      puts "created user #{user.email}"
+    end
+
+    puts "now you have #{User.count} users data"
+  end
+
 end
