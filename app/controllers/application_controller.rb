@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
 
   # private 可以變成 global，這樣view上就可以用 current_cart → 自製的helper
   helper_method :current_cart 
+  protected
+
+  def after_sign_in_path_for(resource)
+    cart_path
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 
   private
   
