@@ -7,9 +7,9 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new(order_params)
-    @order.sn = rand(100..999) + @order.id + Time.now.to_i
+    @order.sn = rand(100..999) + @order.id.to_i + Time.now.to_i
     @order.add_order_items(current_cart)
-    @order.amount = current_cart.sobtotal
+    @order.amount = current_cart.subtotal
 
     if @order.save
       current_cart.destroy

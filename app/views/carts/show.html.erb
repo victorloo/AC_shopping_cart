@@ -1,7 +1,7 @@
-<% if @product.errors.any? %>
+<% if @order.errors.any? %>
   <h2>We have some errors here !</h2>
   <ul>
-    <% @product.errors.full_messages.each do |msg| %>
+    <% @order.errors.full_messages.each do |msg| %>
     <li>
       <%= msg %>
     </li>
