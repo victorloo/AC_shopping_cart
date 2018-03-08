@@ -27,3 +27,6 @@
 
 # Ignore notes
 /wiki
+
+# Ignore my email account
+/config/email.yml

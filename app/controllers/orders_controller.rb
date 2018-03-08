@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       current_cart.destroy
+      UserMailer.notify_order_create(@order).deliver_now!
       redirect_to orders_path, notice: "now order created"
     else
       @items = current_cart.cart_items
