@@ -79,7 +79,7 @@
             Payment Method:
           </th>
           <td>
-            Payment Method:
+            <%#= @order.payment_method %>
           </td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
             Payment Status:
           </th>
           <td>
-            Payment Status:
+            <%= @order.payment_status %>
           </td>
         </tr>
         <tr>
@@ -95,12 +95,14 @@
             Shipping Status:
           </th>
           <td>
-            Shipping Status:
+            <%= @order.shipping_status %>
           </td>
         </tr>
         <tr>
           <td colspan="2", style="text-align:center;">
-            <%= link_to "Cancel Order"%>
+            <% if @order.shipping_status == "not_shipped" %>
+              <%= link_to "Cancel Order", order_path(@order), method: :patch %>
+            <% end %>
           </td>
         </tr>
       </table>
