@@ -11,7 +11,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    cart_path
+    # if there is new order data in the session, go to form page
+    if session[:new_order_data].present?
+      @cart = Cart.find(session[:cart_id])
+      cart_path(@cart)
+    else
+      # if there is no form data in session, proceed as normal
+      super
+    end
   end
 
   def after_sign_out_path_for(resource)
