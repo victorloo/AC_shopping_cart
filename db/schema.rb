@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302200127) do
+ActiveRecord::Schema.define(version: 20180310141139) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "cart_id", null: false
@@ -21,6 +21,39 @@ ActiveRecord::Schema.define(version: 20180302200127) do
   end
 
   create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "order_id", null: false
+    t.integer "price", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "sn", null: false
+    t.integer "amount", null: false
+    t.string "shipping_status", default: "not_shipped"
+    t.string "name", null: false
+    t.string "phone", null: false
+    t.string "payment_status", default: "not_paid"
+    t.string "address", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "sn", null: false
+    t.integer "amount", null: false
+    t.string "payment_method"
+    t.datetime "paid_at"
+    t.text "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

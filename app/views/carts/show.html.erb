@@ -1,34 +1,96 @@
-<section id="cart-list">
-  <div>
-    <h2>Shopping List</h2>
-  </div>
-  <table class="table-amount">
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @items.each do |item| %>
-      <tr class="product-<%= item.product.id %>">
-        <td><%= image_tag item.product.image %></td>
-        <td><%= item.product.name %></td>
-        <td>$ <%= item.product.price %></td>
-        <td class="cart-item-adjust">
-          <%= link_to "+", adjust_item_product_path(item.product, type: "add"), method: :post, remote: true %>
-          <span class="cart-<%= item.product.id %>-qty"><%= item.quantity %></span>
-          <%= link_to "-", adjust_item_product_path(item.product, type: "substract"), method: :post, remote: true %>
-        </td>
-        <td class="item-<%= item.product.id%>-total"><%= item.item_total %></td>
-        <td><%= link_to "", remove_from_cart_product_path(item.product), method: :post, remote: true, class: "glyphicon glyphicon-trash" %></td>
-      </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= render partial: "shared/form_error", locals: { object: @order} %>
+      <section id="cart-list">
+        <div>
+          <h2>Shopping List</h2>
+        </div>
+        <table class="table-amount">
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <% @items.each do |item| %>
+            <tr class="product-<%= item.product.id %>">
+              <td><%= image_tag item.product.image %></td>
+              <td><%= item.product.name %></td>
+              <td>$ <%= item.product.price %></td>
+              <td class="cart-item-adjust">
+                <%= link_to "+", adjust_item_product_path(item.product, type: "add"), method: :post, remote: true %>
+                <span class="cart-<%= item.product.id %>-qty"><%= item.quantity %></span>
+                <%= link_to "-", adjust_item_product_path(item.product, type: "substract"), method: :post, remote: true %>
+              </td>
+              <td class="item-<%= item.product.id%>-total"><%= item.item_total %></td>
+              <td><%= link_to "", remove_from_cart_product_path(item.product), method: :post, remote: true, class: "glyphicon glyphicon-trash" %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="4">Subtotal</td>
+            <td class="amount"><%= current_cart.subtotal %></td>
+            <td></td>
+          </tr>
+        </table>
+        <br>
+        <hr>
+      </section>
+    </div>
+    
+    <!-- 訂單相關資料 -->
+    <%= form_for @order do |f| %>
+    <div class="col-md-12">
+      <section id="shipping-information">
+        <div>
+          <h2>Shipping Information</h2>
+        </div>
+        <br>
+        <div class="shipped">      
+          <div class="form-group">
+            <%= f.label :name, "Name" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :phone, "Phone" %>
+            <%= f.text_field :phone, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :address, "Address" %>
+            <%= f.text_field :address, class: "form-control" %>
+          </div>
+          <br>
+          <hr>
+        </div>
+      </section>
+    </div>
+<!--
+    <div class="col-md-12">
+      <section id="paymentchoice">
+        <h2>Payment Method</h2>
+        <br>
+        <div class="payment">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <%= f.radio_button :payment_status, "non-payment", :checked => true %>
+            </span>
+            <%= label :payment_status, "貨到付款", class: "form-control" %>
+            <span class="input-group-addon">
+              <%= f.radio_button :payment_status, "credit-card" %>
+            </span>
+            <%= label :payment_status, "信用卡", class: "form-control" %>
+          </div>
+        </div>
+      </section>
+    </div> -->
+    
+    <div class="col-md-12">
+      <div class="form-group" style="text-align:right; margin-top:10px;">
+        <%= f.submit "Checkout", class: "btn btn-primary" %>
+      </div>
+    </div>
     <% end %>
-    <tr>
-      <td colspan="4">Subtotal</td>
-      <td class="amount"><%= current_cart.subtotal %></td>
-      <td></td>
-    </tr>
-  </table>
-</section>
+  </div>
+</div>

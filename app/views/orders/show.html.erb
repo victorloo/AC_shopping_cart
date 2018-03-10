@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Order Detail</h1>
+      <table class="table table-striped table-bordered">
+        <caption style="text-align:center;">Product List</caption>
+        <thead>
+          <tr>
+            <th colspan="3">
+              Order # <%= @order.sn %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              Product Name
+            </th>
+            <th>
+              Product Quantity
+            </th>
+            <th>
+              Product amount
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.order_items.each do |item| %>
+            <tr>
+              <td>
+                <%= item.product.name %>
+              </td>
+              <td>
+                <%= item.quantity %>
+              </td>
+              <td>
+                <%= item.price * item.quantity %>
+              </td>
+            </tr>
+            <% end %>
+            <tr>
+              <td colspan="3", style="text-align: center;">
+                <strong>Total Amount: <%= @order.amount %></strong>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+      <hr>
+      <table class="table table-striped table-bordered">
+        <caption style="text-align:center;">Shipping Information</caption>
+        <tr>
+          <th>
+            Name:
+          </th>
+          <td>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Phone:
+          </th>
+          <td>
+            <%= @order.phone %>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Address:
+          </th>
+          <td>
+            <%= @order.address %>
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <table class="table table-striped table-bordered">
+        <caption style="text-align:center;">Payment Information</caption>
+        <tr>
+          <th>
+            Payment Method:
+          </th>
+          <td>
+            <%#= @order.payment_method %>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Payment Status:
+          </th>
+          <td>
+            <%= @order.payment_status %>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Shipping Status:
+          </th>
+          <td>
+            <%= @order.shipping_status %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2", style="text-align:center;">
+            <% if @order.payment_status == "not_paid" && @order.shipping_status != "cancelled" %>
+              <%= link_to "Pay Now!", checkout_spgateway_order_path(@order), method: :post %>
+            <% else %>
+              <%= link_to "Paid!" %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2", style="text-align:center;">
+            <% if @order.shipping_status == "not_shipped" %>
+              <%= link_to "Cancel Order", order_path(@order), method: :patch %>
+            <% else %>
+              <%= link_to "Cannot Cancel Order" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

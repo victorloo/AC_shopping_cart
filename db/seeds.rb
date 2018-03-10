@@ -5,11 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-# Default Admin
-User.create(
-  email: "homer@simpson.com",
-  password: "123456",
-  role: "admin" #記得管理員的差別是 role
-)
-puts "Default admin Homer created!"

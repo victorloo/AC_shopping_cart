@@ -27,7 +27,11 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  
+  # 以下三行是關於自動寄信的設定
+  config.action_mailer.raise_delivery_errors = true # 產品階段要用 false
+  config.action_mailer.default_url_options = { host: "http://localhost:3000" }
+  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
   config.action_mailer.perform_caching = false
 

@@ -13,8 +13,14 @@ Rails.application.routes.draw do
   resource :cart
   # 因為 cart 上的商品加減都會用到，所以全開
 
+  resources :orders do
+    post :checkout_spgateway, on: :member
+  end
+
   namespace :admin do
     resources :products
+    resources :users
+    resources :orders
     root 'products#index'
   end
 end
