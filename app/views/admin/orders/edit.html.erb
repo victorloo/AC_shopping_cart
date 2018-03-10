@@ -1,3 +1,4 @@
+<%= form_for [:admin, @order] do |f| %>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -7,8 +8,7 @@
         <thead>
           <tr>
             <th colspan="3">
-              Order #
-              <%= @order.sn %>
+              Order # <%= @order.sn %>
             </th>
           </tr>
           <tr>
@@ -40,7 +40,7 @@
               <tr>
                 <td colspan="3" , style="text-align: center;">
                   <strong>Total Amount:
-                    <%= @order.amount %>
+                    <%= @order.subtotal %>
                   </strong>
                 </td>
               </tr>
@@ -82,7 +82,7 @@
             Payment Method:
           </th>
           <td>
-            Payment Method:
+            <%#= @order.payment_method %>
           </td>
         </tr>
         <tr>
@@ -90,7 +90,7 @@
             Payment Status:
           </th>
           <td>
-            Payment Status:
+            <%= f.select :payment_status, Order::PAYMENT_STATUS %>
           </td>
         </tr>
         <tr>
@@ -98,15 +98,16 @@
             Shipping Status:
           </th>
           <td>
-            Shipping Status:
+            <%= f.select :shipping_status, Order::SHIPPING_STATUS %>
           </td>
         </tr>
         <tr>
           <td colspan="2" , style="text-align:center;">
-            <%= link_to "Update"%>
+            <%= f.submit %>
           </td>
         </tr>
       </table>
     </div>
   </div>
 </div>
+<% end %>

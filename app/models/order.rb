@@ -8,6 +8,16 @@ class Order < ApplicationRecord
 
   belongs_to :user
 
+  PAYMENT_STATUS = [
+    ["Not Paid", :not_paid],
+    ["Paid", :paid]
+  ]
+
+  SHIPPING_STATUS = [
+    ["Not Shipped", :not_shipped],
+    ["Shipped", :shipped]
+  ]
+
   def add_order_items(cart)
     cart.cart_items.each do |item|
       self.order_items.build(
