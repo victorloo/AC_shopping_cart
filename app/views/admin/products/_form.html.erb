@@ -2,15 +2,7 @@
   <div class="row">
     <h1> <%= action_name.capitalize %> Product</h1>
     <!-- 這樣寫就會自動更換名稱 -->
-    <% if @product.errors.any? %>
-      <h2>We have some errors here !</h2>
-      <ul>
-        <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
-      </ul>
-      <hr>
-    <% end %>
+    <%= render partial: "shared/form_error", locals: { object: @product } %>
 
     <%= form_for [:admin, @product] do |f| %>
       <div class="form-group">

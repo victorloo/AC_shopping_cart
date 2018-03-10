@@ -1,17 +1,7 @@
-<% if @order.errors.any? %>
-  <h2>We have some errors here !</h2>
-  <ul>
-    <% @order.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-  <hr>
-<% end %>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <%= render partial: "shared/form_error", locals: { object: @order} %>
       <section id="cart-list">
         <div>
           <h2>Shopping List</h2>
