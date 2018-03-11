@@ -53,7 +53,7 @@ namespace :dev do
       cart = Cart.create!
 
       # 將 product 放入 cart
-      rand(10).times do
+      rand(1..10).times do
         product = Product.all.sample
         cart.add_cart_item(product)
       end
