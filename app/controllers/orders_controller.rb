@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
         order_id: @order.id,
         amount: @order.amount
       )
+      # 關掉 application.html.erb
       render layout: false
     end
   end
