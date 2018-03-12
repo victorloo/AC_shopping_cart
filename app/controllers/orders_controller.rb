@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  
+   
   def index
     @orders = current_user.orders.order(created_at: :desc)
   end
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
         current_cart.destroy
         # 訂單建立後，相關檔案要清除
         session.delete(:new_order_data)
-        UserMailer.notify_order_create(@order).deliver_now!
+        #UserMailer.notify_order_create(@order).deliver_now!
         redirect_to orders_path, notice: "now order created"
       else
         @items = current_cart.cart_items
@@ -56,9 +56,47 @@ class OrdersController < ApplicationController
         order_id: @order.id,
         amount: @order.amount
       )
+
+      @merchant_id = "MS33470893"
+      @version = '1.4'
+
+      spgateway_params = {
+        MerchantID: @merchant_id,
+        RespondType: "JSON",
+        TimeStamp: @payment.created_at.to_i,
+        Version: @version,
+        MerchantOrderNo: @payment.sn,
+        Amt: @payment.amount,
+        ItemDesc: @order.products.pluck(:name).first.capitalize,
+        Email: @order.user.email,
+        LoginType: 0,
+        ReturnURL: spgateway_return_orders_url
+      }
+
+      spgateway = spgateway_params.stringify_keys
+      raw = spgateway.sort.map{ |(key, value)| "#{key}=#{value}"}* '&'
+
+      hash_key = "1xPGwF7Ntyqrozd7CupSNhf7LFS0YWC9"
+      hash_iv = "mK0q3ME9laL6LJQX"
+
+      cipher = OpenSSL::Cipher::AES256.new(:CBC)
+      cipher.encrypt
+      cipher.key = hash_key
+      cipher.iv = hash_iv
+      encrypted = cipher.update(raw) + cipher.final
+      @aes = encrypted.unpack('H*').first
+
+      check_value = "HashKey=#{hash_key}&#{@aes}&HashIV=#{hash_iv}"
+      @sha = Digest::SHA256.hexdigest(check_value).upcase
+
       # 關掉 application.html.erb
       render layout: false
     end
+  end
+
+  def spgateway_return
+    #params[]
+    redirect_to orders_path
   end
     
   private
