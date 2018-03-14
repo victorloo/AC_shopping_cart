@@ -15,8 +15,11 @@ Rails.application.routes.draw do
 
   resources :orders do
     post :checkout_spgateway, on: :member
-    post :spgateway_return, on: :collection
+    # post :spgateway_return, on: :collection
+    # 打算繞過 orders，改採下方寫法
   end
+
+  post "spgateway/return" #因此需要專屬的 controller
 
   namespace :admin do
     resources :products

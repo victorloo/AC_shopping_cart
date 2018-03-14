@@ -60,21 +60,19 @@ class OrdersController < ApplicationController
       @merchant_id = "MS33470893"
       @version = '1.4'
 
-      spgateway_params = {
+      spgateway_data = {
         MerchantID: @merchant_id,
         RespondType: "JSON",
-        TimeStamp: @payment.created_at.to_i,
+        TimeStamp: Time.now.to_i,
         Version: @version,
-        MerchantOrderNo: @payment.sn,
+        MerchantOrderNo: "#{@payment.id}AC",
         Amt: @payment.amount,
+        ReturnURL: spgateway_return_url,
         ItemDesc: @order.products.pluck(:name).first.capitalize,
         Email: @order.user.email,
-        LoginType: 0,
-        ReturnURL: spgateway_return_orders_url
-      }
-
-      spgateway = spgateway_params.stringify_keys
-      raw = spgateway.sort.map{ |(key, value)| "#{key}=#{value}"}* '&'
+        LoginType: 0        
+      }.to_query #將 hash 轉成 query string
+      # MerchantOrderNo 要用 string
 
       hash_key = "1xPGwF7Ntyqrozd7CupSNhf7LFS0YWC9"
       hash_iv = "mK0q3ME9laL6LJQX"
@@ -83,8 +81,8 @@ class OrdersController < ApplicationController
       cipher.encrypt
       cipher.key = hash_key
       cipher.iv = hash_iv
-      encrypted = cipher.update(raw) + cipher.final
-      @aes = encrypted.unpack('H*').first
+      encrypted = cipher.update(spgateway_data) + cipher.final
+      @aes = encrypted.unpack('H*').first # binary 轉 hex
 
       check_value = "HashKey=#{hash_key}&#{@aes}&HashIV=#{hash_iv}"
       @sha = Digest::SHA256.hexdigest(check_value).upcase
@@ -92,11 +90,6 @@ class OrdersController < ApplicationController
       # 關掉 application.html.erb
       render layout: false
     end
-  end
-
-  def spgateway_return
-    #params[]
-    redirect_to orders_path
   end
     
   private
