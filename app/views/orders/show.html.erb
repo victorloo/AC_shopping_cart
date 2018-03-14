@@ -101,7 +101,9 @@
         <tr>
           <td colspan="2", style="text-align:center;">
             <% if @order.payment_status == "not_paid" && @order.shipping_status != "cancelled" %>
-              <%= link_to "Pay Now!", checkout_spgateway_order_path(@order), method: :post %>
+              <% Payment::PAYMENT_METHODS.each do |method| %>
+                <%= link_to method, checkout_spgateway_order_path(@order, payment_method: method), method: :post %>
+              <% end %>
             <% else %>
               <%= link_to "Paid!" %>
             <% end %>
