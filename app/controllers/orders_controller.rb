@@ -60,32 +60,12 @@ class OrdersController < ApplicationController
       @merchant_id = "MS33470893"
       @version = '1.4'
 
-      spgateway_data = {
-        MerchantID: @merchant_id,
-        RespondType: "JSON",
-        TimeStamp: Time.now.to_i,
-        Version: @version,
-        MerchantOrderNo: "#{@payment.id}AC",
-        Amt: @payment.amount,
-        ReturnURL: spgateway_return_url,
-        ItemDesc: @order.products.pluck(:name).first.capitalize,
-        Email: @order.user.email,
-        LoginType: 0        
-      }.to_query #將 hash 轉成 query string
-      # MerchantOrderNo 要用 string
+      spgateway_data = Spgateway.new(@payment).generate_form_data(spgateway_return_url)
 
-      hash_key = "1xPGwF7Ntyqrozd7CupSNhf7LFS0YWC9"
-      hash_iv = "mK0q3ME9laL6LJQX"
-
-      cipher = OpenSSL::Cipher::AES256.new(:CBC)
-      cipher.encrypt
-      cipher.key = hash_key
-      cipher.iv = hash_iv
-      encrypted = cipher.update(spgateway_data) + cipher.final
-      @aes = encrypted.unpack('H*').first # binary 轉 hex
-
-      check_value = "HashKey=#{hash_key}&#{@aes}&HashIV=#{hash_iv}"
-      @sha = Digest::SHA256.hexdigest(check_value).upcase
+      @merchant_id = spgateway_data[:MerchantID]
+      @trade_info = spgateway_data[:TradeInfo]
+      @trade_sha = spgateway_data[:TradeSha]
+      @version = spgateway_data[:Version]
 
       # 關掉 application.html.erb
       render layout: false
