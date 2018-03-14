@@ -60,13 +60,6 @@ class OrdersController < ApplicationController
       @merchant_id = "MS33470893"
       @version = '1.4'
 
-      spgateway_data = Spgateway.new(@payment).generate_form_data(spgateway_return_url)
-
-      @merchant_id = spgateway_data[:MerchantID]
-      @trade_info = spgateway_data[:TradeInfo]
-      @trade_sha = spgateway_data[:TradeSha]
-      @version = spgateway_data[:Version]
-
       # 關掉 application.html.erb
       render layout: false
     end
