@@ -1,26 +1,9 @@
 class SpgatewayController < ActionController::Base
 
   def return
-    # 比對回傳的 SHA 和我們自行加密的 SHA 是否一樣
-    trade_info = spgateway_params['TradeInfo']
-    trade_sha = spgateway_params['TradeSha']
-
-    data = Spgateway.decrypt(trade_info, trade_sha)
-    
-    # 根據參數的 MerchantOrderNo，查出 payment 實例
-    # 更新相關的 payment 與 order 屬性
-    if data
-      payment = Payment.find(data['Result']['MerchantOrderNo'].to_i)
-      if params['Status'] == 'SUCCESS'
-        payment.paid_at = Time.now
-      end
-      payment.params = data
-    end
+    payment = Payment.find_and_process(spgateway_params)
 
     if payment&.save
-      order = payment.order
-      order.update(payment_status: "paid")
-
       # send paid email
       flash[:notice] = "#{payment.sn} paid"
     else
@@ -29,6 +12,17 @@ class SpgatewayController < ActionController::Base
 
     # 動作完成，導回訂單索引頁
     redirect_to orders_path
+  end
+
+  def notify
+    payment = Payment.find_and_process(spgateway_params)
+
+    if payment&.save
+      # send paid email
+      render text: "1|OK"
+    else
+      render text: "0|ErrorMessage"
+    end
   end
 
   private

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   post "spgateway/return" #因此需要專屬的 controller
+  post "spgateway/notify"
 
   namespace :admin do
     resources :products
