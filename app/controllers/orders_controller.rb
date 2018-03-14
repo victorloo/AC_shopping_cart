@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  
+   
   def index
     @orders = current_user.orders.order(created_at: :desc)
   end
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
         current_cart.destroy
         # 訂單建立後，相關檔案要清除
         session.delete(:new_order_data)
-        UserMailer.notify_order_create(@order).deliver_now!
+        #UserMailer.notify_order_create(@order).deliver_now!
         redirect_to orders_path, notice: "now order created"
       else
         @items = current_cart.cart_items
@@ -54,8 +54,14 @@ class OrdersController < ApplicationController
       @payment = Payment.create!(
         sn: Time.now.to_i,
         order_id: @order.id,
+        payment_method: params[:payment_method],
         amount: @order.amount
       )
+
+      @merchant_id = "MS33470893"
+      @version = '1.4'
+
+      # 關掉 application.html.erb
       render layout: false
     end
   end
