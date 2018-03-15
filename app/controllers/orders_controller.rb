@@ -58,9 +58,6 @@ class OrdersController < ApplicationController
         amount: @order.amount
       )
 
-      @merchant_id = "MS33470893"
-      @version = '1.4'
-
       # 關掉 application.html.erb
       render layout: false
     end
