@@ -233,7 +233,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   puma (~> 3.7)
-  rails (~> 5.1.5)
+  rails (~> 5.1.6)
   rest-client
   sass-rails (~> 5.0)
   selenium-webdriver
@@ -244,7 +244,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.4.3p205
+   ruby 2.4.4p296
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
